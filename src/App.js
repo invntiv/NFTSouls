@@ -66,7 +66,7 @@ const App = () => {
   const askContractToMintNft = async () => {
     // Deployed Rinkeby contract address. 
     // Use .env environment variables to change this later if we want to switch between test networks and mainnet
-    const CONTRACT_ADDRESS = "0x8CF3a94DA54e6aA3e6894434baE04c6991795c6b" 
+    const CONTRACT_ADDRESS = "0xD55D1d7E8427EDCA13cD5369fFD46f539dd7E110" 
     try {
       // We will have access to an window.Ethereum object if signed in via Metamask
       const { ethereum } = window;
