@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
+import myEpicNft from './utils/MyEpicNFT.json';
 
 const TWITTER_HANDLE = '_indras_net_';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
@@ -33,10 +34,11 @@ const App = () => {
   }
 
   /*
-  * Implement your connectWallet method here
+  * Implement connectWallet method to connect to MetaMask
   */
   const connectWallet = async () => {
     try {
+
       const { ethereum } = window;
 
       if (!ethereum) {
@@ -45,17 +47,55 @@ const App = () => {
       }
 
       /*
-      * Fancy method to request access to account.
+      *  Request access to account.
       */
       const accounts = await ethereum.request({ method: "eth_requestAccounts" });
 
       /*
-      * Boom! This should print out public address once we authorize Metamask.
+      * This prints out public address once we authorize Metamask.
       */
       console.log("Connected", accounts[0]);
       setCurrentAccount(accounts[0]); 
+
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  // Method for minting the NFT
+  const askContractToMintNft = async () => {
+    // Deployed Rinkeby contract address. 
+    // Use .env environment variables to change this later if we want to switch between test networks and mainnet
+    const CONTRACT_ADDRESS = "0x8CF3a94DA54e6aA3e6894434baE04c6991795c6b" 
+    try {
+      // We will have access to an window.Ethereum object if signed in via Metamask
+      const { ethereum } = window;
+
+      if(ethereum) {
+        // A "Provider" helps us talk to Eth nodes
+        // See: https://docs.ethers.io/v5/api/signer/#signers
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+
+        // Create the connection to our contract
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
+        
+        // Now we call our contract's method 
+        console.log("Going to pop wallet open to pay gas...");
+        let nftTxn = await connectedContract.makeAnEpicNFT();
+
+        // Wait for it to be mined
+        console.log("Mining...please wait.");
+        await nftTxn.wait();
+
+        // And output the transaction hash
+        console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`)
+
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }        
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -71,7 +111,7 @@ const App = () => {
   }, [])
 
   /*
-  * Added a conditional render! We don't want to show Connect to Wallet if we're already conencted :).
+  * Only show Connect to Wallet if we're not already conencted.
   */
   return (
     <div className="App">
@@ -84,7 +124,7 @@ const App = () => {
           {currentAccount === "" ? (
             renderNotConnectedContainer()
           ) : (
-            <button onClick={null} className="cta-button connect-wallet-button">
+            <button onClick={askContractToMintNft()} className="cta-button connect-wallet-button">
               Mint NFT
             </button>
           )}
