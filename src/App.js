@@ -106,10 +106,24 @@ const App = () => {
       Connect to Metamask
     </button>
   );
-  // img style
+
+  // styles
   const imgStyle = {
-    width: '225px'
+    width: '225px',
+    position: 'absolute',
+    right: '0',
+    left: '0',
+    top: '0',
+    bottom: '0',
+    margin: 'auto auto'
   };
+
+  const imageContainer = {
+    width: '500px',
+    height: '500px',
+    position: 'relative'
+  };
+
   useEffect(() => {
     checkIfWalletIsConnected();
   }, [])
@@ -133,7 +147,7 @@ const App = () => {
             </button>
           )}
         </div>
-        <div className = "container">
+        <div className = "container" style={imageContainer}>
           <img src={heroImg} alt="Hero Logo" style={imgStyle}/>
         </div>
         <div className="footer-container">
