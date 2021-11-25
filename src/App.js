@@ -6,6 +6,8 @@ import myEpicNft from './utils/MyEpicNFT.json';
 import { ethers } from "ethers";
 const TWITTER_HANDLE = '_indras_net_';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
+import { themeChange } from 'theme-change'
+
 //const OPENSEA_LINK = '';
 //const TOTAL_MINT_COUNT = 50;
 
@@ -101,8 +103,9 @@ const App = () => {
   }
 
   // Render Methods
+  // cta-button connect-wallet-button
   const renderNotConnectedContainer = () => (
-    <button onClick={connectWallet} className="cta-button connect-wallet-button">
+    <button onClick={connectWallet} className="btn btn-primary">
       Connect to Metamask
     </button>
   );
@@ -125,6 +128,7 @@ const App = () => {
 
   useEffect(() => {
     checkIfWalletIsConnected();
+    themeChange(false);
   }, [])
 
   /*
@@ -141,7 +145,7 @@ const App = () => {
           {currentAccount === "" ? (
             renderNotConnectedContainer()
           ) : (
-            <button onClick={askContractToMintNft} className="cta-button connect-wallet-button">
+            <button onClick={askContractToMintNft} className="btn btn-primary">
               Mint your NFT
             </button>
           )}
