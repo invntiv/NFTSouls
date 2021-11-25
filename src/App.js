@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
+import heroImg from './assets/hero.png'
 import myEpicNft from './utils/MyEpicNFT.json';
 import { ethers } from "ethers";
 const TWITTER_HANDLE = '_indras_net_';
@@ -66,7 +67,7 @@ const App = () => {
   const askContractToMintNft = async () => {
     // Deployed Rinkeby contract address. 
     // Use .env environment variables to change this later if we want to switch between test networks and mainnet
-    const CONTRACT_ADDRESS = "0xD55D1d7E8427EDCA13cD5369fFD46f539dd7E110" 
+    const CONTRACT_ADDRESS = "0xAAcbc249CbC9fA33bC32163FB63f88fe4Ccbc9C2"
     try {
       // We will have access to an window.Ethereum object if signed in via Metamask
       const { ethereum } = window;
@@ -102,7 +103,7 @@ const App = () => {
   // Render Methods
   const renderNotConnectedContainer = () => (
     <button onClick={connectWallet} className="cta-button connect-wallet-button">
-      Connect to Wallet
+      Connect to Metamask
     </button>
   );
 
@@ -117,7 +118,7 @@ const App = () => {
     <div className="App">
       <div className="container">
         <div className="header-container">
-          <p className="header gradient-text">My NFT Collection</p>
+          <p className="header gradient-text">NFTSouls - Randomly Generated NFT Collection</p>
           <p className="sub-text">
             Each unique. Each beautiful. Discover your NFT today.
           </p>
@@ -125,9 +126,12 @@ const App = () => {
             renderNotConnectedContainer()
           ) : (
             <button onClick={askContractToMintNft} className="cta-button connect-wallet-button">
-              Mint NFT
+              Mint your NFT
             </button>
           )}
+        </div>
+        <div className = "container">
+          <img src={heroImg} alt="Hero Logo" style="width: 225px"/>
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
