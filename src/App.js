@@ -119,8 +119,7 @@ const App = () => {
   };
 
   const imageContainer = {
-    width: '500px',
-    height: '500px',
+    height: '720px',
     position: 'relative'
   };
 
