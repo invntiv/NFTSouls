@@ -106,7 +106,10 @@ const App = () => {
       Connect to Metamask
     </button>
   );
-
+  // img style
+  const imgStyle = {
+    width: '225px'
+  };
   useEffect(() => {
     checkIfWalletIsConnected();
   }, [])
@@ -131,7 +134,7 @@ const App = () => {
           )}
         </div>
         <div className = "container">
-          <img src={heroImg} alt="Hero Logo" style="width: 225px"/>
+          <img src={heroImg} alt="Hero Logo" style={imgStyle}/>
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
