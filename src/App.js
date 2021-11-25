@@ -110,6 +110,22 @@ const App = () => {
     </button>
   );
 
+  // The modal that notifies that we're using the Rinkeby network and allows the user to mint
+  const renderMintingModal = () => (
+    <div id="my-modal" class="modal">
+      <div class="modal-box">
+        <p>Enim dolorem dolorum omnis atque necessitatibus. Consequatur aut adipisci qui iusto illo eaque. Consequatur repudiandae et. Nulla ea quasi eligendi. Saepe velit autem minima.</p> 
+        <div class="modal-action">
+          <a href="/components/modal#" class="btn btn-primary">Accept</a> 
+          <button onClick={askContractToMintNft} className="btn btn-primary">
+                  Mint your NFT
+                </button>
+          <a href="/components/modal#" class="btn">Close</a>
+        </div>
+      </div>
+    </div>
+    );
+
   // styles
   const imgStyle = {
     width: '225px',
@@ -145,9 +161,7 @@ const App = () => {
           {currentAccount === "" ? (
             renderNotConnectedContainer()
           ) : (
-            <button onClick={askContractToMintNft} className="btn btn-primary">
-              Mint your NFT
-            </button>
+            <a href={renderMintingModal} class="btn btn-primary">open modal</a> 
           )}
         </div>
         <div className = "container" style={imageContainer}>
@@ -166,5 +180,6 @@ const App = () => {
     </div>
   );
 };
+
 
 export default App;
