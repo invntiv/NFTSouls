@@ -1,5 +1,5 @@
 
-[image](https://i.imgur.com/Cu3FRhq.png)
+![logo](https://i.imgur.com/Cu3FRhq.png)
 
 # NFTSouls pre-alpha demo
 
