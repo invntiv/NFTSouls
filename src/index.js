@@ -9,7 +9,6 @@ ReactDOM.render(
   <React.StrictMode>
     <App/>
     <Home />
-    <Countdown />
   </React.StrictMode>,
   document.getElementById('root')
 );
