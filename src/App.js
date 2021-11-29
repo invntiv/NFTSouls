@@ -2,10 +2,8 @@ import { themeChange } from 'theme-change'
 import React, { useEffect, useState } from "react";
 import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
-import myEpicNft from './utils/MyEpicNFT.json';
 import { ethers } from 'ethers';
 import threeRandomWordsNft from './utils/ThreeRandomWordsNFT.json'
-import { isDOMComponent } from 'react-dom/test-utils';
 const TWITTER_HANDLE = '_indras_net_';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
@@ -82,7 +80,7 @@ function  App() {
         const signer = provider.getSigner();
 
         // Create the connection to our contract
-        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, threeRandomWordsNft.abi, signer);
         
         // Now we call our contract's method 
         console.log("Going to pop wallet open to pay gas...");
