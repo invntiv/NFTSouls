@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
 import { ethers } from 'ethers';
-import threeRandomWordsNft from '../utils/ThreeRandomWordsNFT.json'
+import threeRandomWordsNft from './utils/ThreeRandomWordsNFT.json'
 const TWITTER_HANDLE = '_indras_net_';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
