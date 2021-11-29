@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
 import myEpicNft from './utils/MyEpicNFT.json';
-import { ethers } from "ethers";
+import threeRandomWordsNft from './utils/ThreeRandomWordsNFT.json'
 const TWITTER_HANDLE = '_indras_net_';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
@@ -68,7 +68,7 @@ function  App() {
   const askContractToMintNft = async () => {
     // Deployed Rinkeby contract address. 
     // Use .env environment variables to change this later if we want to switch between test networks and mainnet
-    const CONTRACT_ADDRESS = "0x543281c4031a25e15b6ECECe4Fb569CDB22198Ba"
+    const CONTRACT_ADDRESS = "0x93F312De7e1C3097FA20792C3da0E1c8983D4f3a"
     try {
       // We will have access to an window.Ethereum object if signed in via Metamask
       const { ethereum } = window;
@@ -80,7 +80,7 @@ function  App() {
         const signer = provider.getSigner();
 
         // Create the connection to our contract
-        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, threeRandomWordsNft.abi, signer);
         
         // Now we call our contract's method 
         console.log("Going to pop wallet open to pay gas...");
