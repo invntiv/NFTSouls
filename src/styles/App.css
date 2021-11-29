@@ -1,8 +1,11 @@
 .App {
   height: 100vh;
   background-color: #0d1116;
-  overflow: scroll;
+  /* overflow: scroll; */
+  display:flex;
   text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {

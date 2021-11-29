@@ -2,7 +2,6 @@ import { themeChange } from 'theme-change'
 import React, { useEffect, useState } from "react";
 import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
-import heroImg from './assets/hero.png'
 import myEpicNft from './utils/MyEpicNFT.json';
 import { ethers } from "ethers";
 const TWITTER_HANDLE = '_indras_net_';
@@ -11,7 +10,7 @@ const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 //const OPENSEA_LINK = '';
 //const TOTAL_MINT_COUNT = 50;
 
-const App = () => {
+function  App() {
 
     const [currentAccount, setCurrentAccount] = useState("");
     
@@ -69,7 +68,7 @@ const App = () => {
   const askContractToMintNft = async () => {
     // Deployed Rinkeby contract address. 
     // Use .env environment variables to change this later if we want to switch between test networks and mainnet
-    const CONTRACT_ADDRESS = "0xAAcbc249CbC9fA33bC32163FB63f88fe4Ccbc9C2"
+    const CONTRACT_ADDRESS = "0x543281c4031a25e15b6ECECe4Fb569CDB22198Ba"
     try {
       // We will have access to an window.Ethereum object if signed in via Metamask
       const { ethereum } = window;
@@ -85,7 +84,7 @@ const App = () => {
         
         // Now we call our contract's method 
         console.log("Going to pop wallet open to pay gas...");
-        let nftTxn = await connectedContract.makeAnEpicNFT();
+        let nftTxn = await connectedContract.makeAnNFT();
 
         // Wait for it to be mined
         console.log("Mining...please wait.");
@@ -110,38 +109,6 @@ const App = () => {
     </button>
   );
 
-  // The modal that notifies that we're using the Rinkeby network and allows the user to mint
-  const renderMintingModal = () => (
-    <div id="my-modal" class="modal">
-      <div class="modal-box">
-        <p>Enim dolorem dolorum omnis atque necessitatibus. Consequatur aut adipisci qui iusto illo eaque. Consequatur repudiandae et. Nulla ea quasi eligendi. Saepe velit autem minima.</p> 
-        <div class="modal-action">
-          <a href="/components/modal#" class="btn btn-primary">Accept</a> 
-          <button onClick={askContractToMintNft} className="btn btn-primary">
-                  Mint your NFT
-                </button>
-          <a href="/components/modal#" class="btn">Close</a>
-        </div>
-      </div>
-    </div>
-    );
-
-  // styles
-  const imgStyle = {
-    width: '225px',
-    position: 'absolute',
-    right: '0',
-    left: '0',
-    top: '0',
-    bottom: '0',
-    margin: 'auto auto'
-  };
-
-  const imageContainer = {
-    height: '720px',
-    position: 'relative'
-  };
-
   useEffect(() => {
     checkIfWalletIsConnected();
     themeChange(false);
@@ -158,15 +125,26 @@ const App = () => {
           <p className="sub-text">
             Each unique. Each beautiful. Discover your NFT today.
           </p>
+          <p>
           {currentAccount === "" ? (
             renderNotConnectedContainer()
           ) : (
-            <a href={renderMintingModal} class="btn btn-primary">open modal</a> 
+            <a href='/components/modal#my-modal' class="btn btn-primary">I want one!</a> 
           )}
+          </p>
         </div>
-        <div className = "container" style={imageContainer}>
-          <img src={heroImg} alt="Hero Logo" style={imgStyle}/>
-        </div>
+        <div id="my-modal" class="modal">
+          <div class="modal-box">
+            <p>Make sure your Metamask wallet is connected to the Rinkeby test network! You can get free test Ether from a faucet;<br/> try <a href='https://faucet.rinkeby.io/' target='_blank' className='link-accent'>here</a> or <a href='https://rinkeby-faucet.com/' target='_blank' className='link-accent'> here</a>.</p> 
+            <div class="modal-action">
+              <a href="/components/modal#">
+              <button onClick={askContractToMintNft} className="btn btn-primary">
+                      Mint your NFT
+                    </button></a>
+              <a href="/components/modal#" class="btn">Close</a>
+            </div>
+          </div>
+      </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
           <a
