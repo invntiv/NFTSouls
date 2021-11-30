@@ -31,8 +31,73 @@ function App() {
         const account = accounts[0];
         console.log("Found an authorized account:", account);
         setCurrentAccount(account)
+
+        // If the user comes to our site and ALREADY has metamask connected and authorized,
+        // we need to set up the event listener at that point.
+        setupEventListener();
+
     } else {
         console.log("No authorized account found")
+    }
+  }
+
+  /*
+  * Implement connectWallet method to connect to MetaMask
+  */
+  const connectWallet = async () => {
+    try {
+
+      const { ethereum } = window;
+
+      if (!ethereum) {
+        alert("Get MetaMask!");
+        return;
+      }
+
+      /*
+      *  Request access to account.
+      */
+      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+
+      /*
+      * This prints out public address once we authorize Metamask.
+      */
+      console.log("Connected", accounts[0]);
+      setCurrentAccount(accounts[0]); 
+      
+      // Setup the listener in the event the user ocmes to the site and connects their wallet for the first time
+      setupEventListener();
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // Set up our event listener.
+  const setupEventListener = async () => {
+    // really similar to our function askContractToMintNft
+    try{
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, threeRandomWordsNft.abi, signer);
+        
+        // This captures our event that will be thrown when the contract is engaged with by the signer
+        // its basically a webhook
+        connectedContract.on("NewThreeRandomWordNFTMinted", (from, tokenId) =>{
+          console.log(from, tokenId.toNumber())
+          alert(`Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on OpenSea. Here's the link: https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`)
+        });
+
+        console.log("Event listener set up");
+      } else {
+        console.log("Ethereum object doesn't exist, so we can't setup the event listener");
+      }
+
+    } catch (error){
+      console.log(error);
     }
   }
 
@@ -69,35 +134,6 @@ function App() {
       }        
     } catch (error) {
       console.log(error);
-    }
-  }
-
-  /*
-  * Implement connectWallet method to connect to MetaMask
-  */
-  const connectWallet = async () => {
-    try {
-
-      const { ethereum } = window;
-
-      if (!ethereum) {
-        alert("Get MetaMask!");
-        return;
-      }
-
-      /*
-      *  Request access to account.
-      */
-      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-
-      /*
-      * This prints out public address once we authorize Metamask.
-      */
-      console.log("Connected", accounts[0]);
-      setCurrentAccount(accounts[0]); 
-
-    } catch (error) {
-      console.log(error)
     }
   }
 
