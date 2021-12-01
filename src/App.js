@@ -26,6 +26,14 @@ function App() {
     }
 
     const accounts = await ethereum.request({ method: 'eth_accounts' });
+    let chainId = await ethereum.request({ method: 'eth_chainId' });
+    console.log("Connected to chain " + chainId);
+    
+    // String, hex code of the chainId of the Rinkebey test network
+    const rinkebyChainId = "0x4"; 
+    if (chainId !== rinkebyChainId) {
+      alert("You are not connected to the Rinkeby Test Network!");
+    }
 
     if (accounts.length !== 0) {
         const account = accounts[0];
@@ -45,8 +53,8 @@ function App() {
   * Implement connectWallet method to connect to MetaMask
   */
   const connectWallet = async () => {
-    try {
 
+    try {
       const { ethereum } = window;
 
       if (!ethereum) {
@@ -76,7 +84,7 @@ function App() {
   // Set up our event listener.
   const setupEventListener = async () => {
     // really similar to our function askContractToMintNft
-    try{
+    try {
       const { ethereum } = window;
 
       if (ethereum) {
@@ -88,7 +96,7 @@ function App() {
         // its basically a webhook
         connectedContract.on("NewThreeRandomWordNFTMinted", (from, tokenId) => {
           console.log(from, tokenId.toNumber())
-          alert("Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on OpenSea. Here's the link: https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}");
+          alert(`Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on OpenSea. Here's the link: https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`);
         });
 
         console.log("Event listener set up");
@@ -159,7 +167,7 @@ function App() {
         <div className="header-container">
           <p className="header gradient-text">NFTSouls - Randomly Generated NFT Collection</p>
           <p className="sub-text">
-            Each unique. Each beautiful. Discover your NFT today.
+            Each one is unique. Mint you randomized NFT today!
           </p>
           <p>
           {currentAccount === "" ? (
@@ -188,7 +196,7 @@ function App() {
             href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"
-          >{`built on @${TWITTER_HANDLE}`}</a>
+          >{`built by @${TWITTER_HANDLE}`}</a>
         </div>
       </div>
     </div>
