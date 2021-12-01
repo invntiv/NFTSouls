@@ -9,7 +9,7 @@ const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 //const OPENSEA_LINK = 'testnets.opensea.io';
 //const TOTAL_MINT_COUNT = 50;
-const CONTRACT_ADDRESS = "0x93F312De7e1C3097FA20792C3da0E1c8983D4f3a"
+const CONTRACT_ADDRESS = "0x4CfD7b12f2E925d4403493B80A81670ba3940368"
 
 function App() {
 
@@ -86,9 +86,9 @@ function App() {
         
         // This captures our event that will be thrown when the contract is engaged with by the signer
         // its basically a webhook
-        connectedContract.on("NewThreeRandomWordNFTMinted", (from, tokenId) =>{
+        connectedContract.on("NewThreeRandomWordNFTMinted", (from, tokenId) => {
           console.log(from, tokenId.toNumber())
-          alert(`Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on OpenSea. Here's the link: https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`)
+          alert("Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on OpenSea. Here's the link: https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}");
         });
 
         console.log("Event listener set up");
