@@ -167,7 +167,7 @@ function App() {
         <div className="header-container">
           <p className="header gradient-text">NFTSouls - Randomly Generated NFT Collection</p>
           <p className="sub-text">
-            Each one is unique. Mint you randomized NFT today!
+            Each one is unique. Mint your randomized NFT today!
           </p>
           <p>
           {currentAccount === "" ? (
