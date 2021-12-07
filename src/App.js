@@ -4,7 +4,7 @@ import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
 import { ethers } from 'ethers';
 import threeRandomWordsNft from './utils/ThreeRandomWordsNFT.json'
-const TWITTER_HANDLE = '_indras_net_';
+const TWITTER_HANDLE = '_invntiv_';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 //const OPENSEA_LINK = 'testnets.opensea.io';
@@ -173,19 +173,19 @@ function App() {
           {currentAccount === "" ? (
             renderNotConnectedContainer()
           ) : (
-            <a href='/components/modal#my-modal' class="btn btn-primary">I want one!</a> 
+            <a href='/components/modal#my-modal' className="btn btn-primary">I want one!</a> 
           )}
           </p>
         </div>
-        <div id="my-modal" class="modal">
-          <div class="modal-box">
+        <div id="my-modal" className="modal">
+          <div className="modal-box">
             <p>Make sure your Metamask wallet is connected to the Rinkeby test network! You can get free test Ether from a faucet;<br/> try <a href='https://faucet.rinkeby.io/' target='_blank' className='link-accent'>here</a> or <a href='https://rinkeby-faucet.com/' target='_blank' className='link-accent'> here</a>.</p> 
-            <div class="modal-action">
+            <div className="modal-action">
               <a href="/components/modal#">
               <button onClick={askContractToMintNft} className="btn btn-primary">
                       Mint your NFT
                     </button></a>
-              <a href="/components/modal#" class="btn">Close</a>
+              <a href="/components/modal#" className="btn">Close</a>
             </div>
           </div>
       </div>
